@@ -26,7 +26,13 @@ class UserManager(DjangoUserManager):
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra_fields)
 
-    def create_superuser(self, username=None,email=None, password=None, **extra_fields):
+    def create_superuser(
+            self,
+            username=None,
+            email=None,
+            password=None,
+            **extra_fields
+    ):
 
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
@@ -38,6 +44,7 @@ class UserManager(DjangoUserManager):
             raise ValueError("Superuser must have is_superuser=True.")
 
         return self._create_user(email, password, **extra_fields)
+
 
 class User(AbstractUser):
     email = models.EmailField(_("email address"), unique=True)
